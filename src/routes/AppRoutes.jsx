@@ -15,6 +15,8 @@ import Product from '../pages/admin/Product'
 import Manage from '../pages/admin/Manage'
 import HomeUser from '../pages/user/HomeUser'
 import LayoutUser from '../layouts/LayoutUser'
+import ProtectRouteUser from './ProtectRouteUser'
+import ProtectRouteAdmin from './ProtectRouteAdmin'
 
 const router = createBrowserRouter([
     { 
@@ -33,7 +35,9 @@ const router = createBrowserRouter([
     },
     {
         path:'/admin',
-        element:<LayoutAdmin />,    
+        // element:<LayoutAdmin />,    
+        // คือต่าจากนี้ถ้าจะเรียนหน้า user จะต้องผ่านตัว ProtectRouteAdmin ก่อนให้หมด
+        element:<ProtectRouteAdmin element={<LayoutAdmin />} />, // ส่ง LayoutAdmin ไปเป็น prop
         children:[
             // ไอพวกข้างล่างนี้จะเป็นลูกๆ เวลาอยู่หน้าหลักมันจะเห็น Nav bar ด้านบน เป็นแม่แบบตัวหลัก
             { index:true, element:<Dashboard /> }, // ถ้า path เดียวกันให้ใส่ index:true
@@ -44,7 +48,9 @@ const router = createBrowserRouter([
     },
     {
         path:'/user',
-        element:<LayoutUser />,
+        //element:<LayoutUser />,
+        // คือต่าจากนี้ถ้าจะเรียนหน้า user จะต้องผ่านตัว ProtectRouteUser ก่อนให้หมด
+        element:<ProtectRouteUser element={<LayoutUser />} />, // ส่ง LayoutUser ไปเป็น prop
         children:[
             // ไอพวกข้างล่างนี้จะเป็นลูกๆ เวลาอยู่หน้าหลักมันจะเห็น Nav bar ด้านบน เป็นแม่แบบตัวหลัก
             { index:true, element:<HomeUser /> } // ถ้า path เดียวกันให้ใส่ index:true
